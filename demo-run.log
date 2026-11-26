@@ -1,0 +1,95 @@
+=== QDAY DEMO RUN 2026-11-26T06:23:50Z ===
+--- 1. window status (before) ---
+$ tsx --env-file=.env scripts/window.ts status
+account:  0xce5E05E37Aa9C4034a9ab7C30B8777958C0E1A48  (qor1ee0qtcm648zqxj56klpshpmhjkxquxjg757sh6)
+PQC key:  registered
+window:   live; 448 blocks, 4 txs, 3720498 uqor left
+--- 2. window open (fresh hybrid-signed tx) ---
+$ tsx --env-file=.env scripts/window.ts open
+opened: A5000B2F77086A5550FE546EA4651452F91B6EAA5F937CBE697E230C7F65EE74
+window: 600 blocks, 5 txs, 3750000 uqor (value plus fees)
+Opening advanced the account's nonce; deploy now.
+--- 3. reset ignition state for a fresh deploy ---
+--- 4. deploy Counter on testnet ---
+$ hardhat ignition deploy ignition/modules/Counter.ts --network qorechainTestnet
+? Confirm deploy to network qorechainTestnet (9800)? › (y/N)✔ Confirm deploy to network qorechainTestnet (9800)? … yes
+Hardhat Ignition starting for [ CounterModule ]...
+Hardhat Ignition 🚀
+
+Deploying [ CounterModule ]
+
+Batch #1
+  Executing CounterModule#Counter...
+  Executed CounterModule#Counter
+
+[ CounterModule ] successfully deployed 🚀
+
+Deployed Addresses
+
+CounterModule#Counter - 0x37C7Bdd018bDaf766f2772Fea425A49660a6d3aE
+--- 5. deployed address + deploy tx from journal ---
+{
+  "CounterModule#Counter": "0x37C7Bdd018bDaf766f2772Fea425A49660a6d3aE"
+}--- 6. window status (after) ---
+$ tsx --env-file=.env scripts/window.ts status
+account:  0xce5E05E37Aa9C4034a9ab7C30B8777958C0E1A48  (qor1ee0qtcm648zqxj56klpshpmhjkxquxjg757sh6)
+PQC key:  registered
+window:   live; 581 blocks, 4 txs, 3720498 uqor left
+=== DEMO RUN DONE ===
+--- 7. REST check: hybrid tx A5000B2F... ---
+tx_response.code: 0 | height: 10772974 | gas_used: 187115
+extensions: [
+ {
+  "@type": "/qorechain.pqc.v1.PQCHybridSignature",
+  "algorithm_id": 1,
+  "pqc_signature": "2N6w/kXyqxvk5d7fxiId5gJ1kX6v/20hmIt226OUKhqzT1wRvM5rBi3IBcYM6TKku4sCa4LRyXDaMPqKShHrtYw8mjpilWstzd1zWwcHV0b/WiClT+fvsH2JCOZOSDMx+aORwAlLtV+JdbZiU/GxgA2q/7tPaFEJVMcPh78FRv1LAJQenZAmJWHLOi+x90GqwLjypzJPKPbWmWm5O2jVe0DJw9+QNxQwv7Um7Uk4UW1vlOItSJr6K0A/0iHFL2Nfx/WENR0GxQiraHqzrDMGS429ckHxnI9l+Jr9vlJ+veZTqGgXjiFBuAbiP3Yc7NdeThfrikEy5PiTooafOeTeShnL475HP7qnKwaqOTAkjHqioWz1UQPOj5CMIEoC8kS4yxeHFf+gePoVbsLhGSVMmPa38/5k/SkkJRVplbxRANU0Ea6HDa06bk6PCvPjKfvrENCKznBuYbunJWBIlap40o3mveq5viGtIPYscM/kfTjcgQdEeYjZEuh
+Traceback (most recent call last):
+  File "<stdin>", line 15, in <module>
+IndexError: list index out of range
+--- 8. EVM receipt: deploy tx 0x2a4b10f4... ---
+{
+    "jsonrpc": "2.0",
+    "id": 1,
+    "result": {
+        "blockHash": "0x6e00ba2fdf2484f7c72c8052df2fb881b0f6b695d5778615a22527808fab55b7",
+        "blockNumber": "0xa461f9",
+        "contractAddress": "0x37c7bdd018bdaf766f2772fea425a49660a6d3ae",
+        "cumulativeGasUsed": "0x21e4d",
+        "effectiveGasPrice": "0x1a3185c500",
+        "from": "0xce5e05e37aa9c4034a9ab7c30b8777958c0e1a48",
+        "gasUsed": "0x21e4d",
+        "logs": [
+            {
+                "address": "0x37c7bdd018bdaf766f2772fea425a49660a6d3ae",
+                "topics": [
+                    "0x0ef4482aceb854636f33f9cd319f9e1cd6fe3aa2e60523f3583c287b89382445"
+                ],
+                "data": "0x0000000000000000000000000000000000000000000000000000000000000000",
+                "blockNumber": "0xa461f9",
+                "transactionHash": "0x2a4b10f4c9d42d791df177875898172a67e22ebe970dcddcccda73fa04340dd6",
+                "transactionIndex": "0x0",
+                "blockHash": "0x6e00ba2fdf2484f7c72c8052df2fb881b0f6b695d5778615a22527808fab55b7",
+                "blockTimestamp": "0x6b07d091",
+                "logIndex": "0x0",
+                "removed": false
+            }
+        ],
+        "logsBloom": "0x00000000000000000040000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000000000000000a00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000008000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000",
+        "status": "0x1",
+        "to": null,
+        "transactionHash": "0x2a4b10f4c9d42d791df177875898172a67e22ebe970dcddcccda73fa04340dd6",
+        "transactionIndex": "0x0",
+        "type": "0x2"
+    }
+}
+--- 9. eth_getCode at new Counter ---
+code length: 371 bytes
+tx_response keys: ['height', 'txhash', 'codespace', 'code', 'data', 'raw_log', 'logs', 'info', 'gas_wanted', 'gas_used', 'tx', 'timestamp', 'events']
+logs entries: 0
+EVENT (top-level) pqc_hybrid_verify: {'address': 'qor1ee0qtcm648zqxj56klpshpmhjkxquxjg757sh6', 'algorithm_id': 'dilithium5', 'status': 'verified'}
+event found: True
+signature[0] length: 64 bytes
+extension @type: /qorechain.pqc.v1.PQCHybridSignature | algorithm_id: 1
+pqc_signature length: 4627 bytes
+secp256k1 signature length: 64 bytes
+NOTE (packaging, 2026-11-26): lines 46-48 above are a first verification script that crashed on an empty `logs` array; the same check was re-run immediately after (lines 87-94) and found the pqc_hybrid_verify event in the top-level `events` array. No output above was edited.

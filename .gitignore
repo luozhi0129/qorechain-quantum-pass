@@ -1,0 +1,20 @@
+# Secrets — never commit (any .env at any depth)
+.env
+**/.env
+
+# Dependencies and build output
+node_modules/
+artifacts/
+cache/
+dist/
+*.tsbuildinfo
+
+# Packaging scratch — video intermediates and form uploads, not repo contents
+demo-video.mp4
+cover.png
+video/
+frames/
+slides/
+narration/
+seg-*.mp4
+concat.txt

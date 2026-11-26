@@ -1,0 +1,49 @@
+{
+  "_format": "hh3-sol-build-info-1",
+  "id": "solc-0_8_28-58406237e6279de7cbde74f4128f2d2ef18d85af",
+  "solcVersion": "0.8.28",
+  "solcLongVersion": "0.8.28+commit.7893614a",
+  "compilerType": "solc",
+  "toolVersions": {
+    "hardhat": "3.22.0"
+  },
+  "userSourceNameMap": {
+    "contracts/Counter.sol": "project/contracts/Counter.sol"
+  },
+  "input": {
+    "language": "Solidity",
+    "settings": {
+      "evmVersion": "cancun",
+      "optimizer": {
+        "enabled": true,
+        "runs": 200
+      },
+      "outputSelection": {
+        "*": {
+          "": [
+            "ast"
+          ],
+          "*": [
+            "abi",
+            "evm.bytecode.linkReferences",
+            "evm.bytecode.object",
+            "evm.bytecode.opcodes",
+            "evm.bytecode.sourceMap",
+            "evm.deployedBytecode.immutableReferences",
+            "evm.deployedBytecode.linkReferences",
+            "evm.deployedBytecode.object",
+            "evm.deployedBytecode.opcodes",
+            "evm.deployedBytecode.sourceMap",
+            "evm.methodIdentifiers"
+          ]
+        }
+      },
+      "remappings": []
+    },
+    "sources": {
+      "project/contracts/Counter.sol": {
+        "content": "// SPDX-License-Identifier: Apache-2.0\npragma solidity ^0.8.24;\n\n/// @title Counter\n/// @notice A minimal storage contract: a single number you can read, set, and\n///         increment. Used as the smallest useful example of deploying and\n///         interacting with a contract on the QoreChain EVM Engine.\ncontract Counter {\n    /// @notice The current count.\n    uint256 public count;\n\n    /// @notice Emitted whenever the count changes.\n    event CountChanged(uint256 newCount);\n\n    /// @param initial The starting value for the counter.\n    constructor(uint256 initial) {\n        count = initial;\n        emit CountChanged(initial);\n    }\n\n    /// @notice Increase the count by one.\n    function increment() external {\n        count += 1;\n        emit CountChanged(count);\n    }\n\n    /// @notice Set the count to an explicit value.\n    /// @param value The new count.\n    function set(uint256 value) external {\n        count = value;\n        emit CountChanged(value);\n    }\n}\n"
+      }
+    }
+  }
+}
